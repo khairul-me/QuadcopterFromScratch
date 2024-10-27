@@ -2,21 +2,19 @@
 
 <div align="center">
 
-![Drone Banner](https://via.placeholder.com/800x200?text=DIY+Quadcopter+Project)
+![GitHub last commit](https://img.shields.io/github/last-commit/khairul-me/QuadcopterFromScratch)
+![GitHub issues](https://img.shields.io/github/issues/khairul-me/QuadcopterFromScratch)
+![GitHub stars](https://img.shields.io/github/stars/khairul-me/QuadcopterFromScratch)
+![GitHub forks](https://img.shields.io/github/forks/khairul-me/QuadcopterFromScratch)
+![GitHub license](https://img.shields.io/github/license/khairul-me/QuadcopterFromScratch)
 
-[![GitHub last commit](https://img.shields.io/github/last-commit/yourusername/DIY-Quadcopter-Guide)](https://github.com/yourusername/DIY-Quadcopter-Guide/commits/main)
-[![GitHub issues](https://img.shields.io/github/issues/yourusername/DIY-Quadcopter-Guide)](https://github.com/yourusername/DIY-Quadcopter-Guide/issues)
-[![GitHub stars](https://img.shields.io/github/stars/yourusername/DIY-Quadcopter-Guide)](https://github.com/yourusername/DIY-Quadcopter-Guide/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/yourusername/DIY-Quadcopter-Guide)](https://github.com/yourusername/DIY-Quadcopter-Guide/network/members)
-[![GitHub license](https://img.shields.io/github/license/yourusername/DIY-Quadcopter-Guide)](https://github.com/yourusername/DIY-Quadcopter-Guide/blob/main/LICENSE)
+A comprehensive guide to building an advanced quadcopter drone with deep insights into the physics and engineering principles.
 
-**A comprehensive guide to building an advanced quadcopter drone with deep insights into the physics and engineering principles.**
-
-[Getting Started](#getting-started) •
-[Components](#components) •
-[Physics](#physics-principles) •
-[Build Guide](#build-guide) •
-[Documentation](https://yourusername.github.io/DIY-Quadcopter-Guide)
+[Getting Started](#getting-started) • 
+[Components](#components) • 
+[Physics](#physics-principles) • 
+[Build Guide](#build-guide) • 
+[Documentation](#documentation)
 
 </div>
 
@@ -40,6 +38,16 @@
 
 This project guides you through building a professional-grade quadcopter drone, emphasizing understanding the underlying physics and engineering principles. Perfect for hobbyists, students, and professionals interested in aerial robotics.
 
+### Technical Specifications
+```yaml
+Frame Size: 450mm
+Flight Time: 15-20 minutes
+Max Speed: 60 km/h
+Control Range: 1-2 km
+Maximum Payload: 500g
+Total Weight: ~1200g
+```
+
 ### Key Features
 - Advanced flight control systems
 - GPS-enabled autonomous capabilities
@@ -48,39 +56,32 @@ This project guides you through building a professional-grade quadcopter drone, 
 - Custom PID tuning capabilities
 - Optional FPV (First Person View) support
 
-### Technical Specifications
-```yaml
-Frame Size: 450mm
-Flight Time: ~15-20 minutes
-Max Speed: 60 km/h
-Control Range: 1-2 km
-Maximum Payload: 500g
-Total Weight: ~1200g
-```
-
 ## 📐 Physics Principles
 
 ### Core Physics Concepts
 
 #### 1. Thrust Dynamics
-```math
+```
 T = CT × ρ × n² × D⁴
 
 Where:
-T = Thrust
+T = Thrust (N)
 CT = Thrust coefficient
-ρ = Air density
-n = Propeller rotational speed
-D = Propeller diameter
+ρ = Air density (kg/m³)
+n = Propeller rotational speed (rev/s)
+D = Propeller diameter (m)
 ```
 
 #### 2. Power Requirements
-```math
+```
 P = CP × ρ × n³ × D⁵
 
 Where:
-P = Power
+P = Power (W)
 CP = Power coefficient
+ρ = Air density (kg/m³)
+n = Propeller rotational speed (rev/s)
+D = Propeller diameter (m)
 ```
 
 #### 3. Flight Dynamics
@@ -90,65 +91,43 @@ The quadcopter operates on four fundamental movements:
 - **Pitch**: Forward/backward rotation
 - **Yaw**: Horizontal rotation
 
-### Force Diagram
-
-<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-    <!-- Center Frame -->
-    <rect x="175" y="175" width="50" height="50" fill="#333"/>
-    
-    <!-- Motors and Force Vectors -->
-    <circle cx="150" cy="150" r="20" fill="#666"/>
-    <line x1="150" y1="150" x2="150" y2="100" stroke="blue" stroke-width="2"/>
-    
-    <circle cx="250" cy="150" r="20" fill="#666"/>
-    <line x1="250" y1="150" x2="250" y2="100" stroke="blue" stroke-width="2"/>
-    
-    <circle cx="150" cy="250" r="20" fill="#666"/>
-    <line x1="150" y1="250" x2="150" y2="300" stroke="blue" stroke-width="2"/>
-    
-    <circle cx="250" cy="250" r="20" fill="#666"/>
-    <line x1="250" y1="250" x2="250" y2="300" stroke="blue" stroke-width="2"/>
-    
-    <!-- Force Labels -->
-    <text x="130" y="90" fill="black">F1</text>
-    <text x="230" y="90" fill="black">F2</text>
-    <text x="130" y="320" fill="black">F3</text>
-    <text x="230" y="320" fill="black">F4</text>
-</svg>
-
 ## 🔧 Components & Requirements
 
-### Essential Components List
+### Essential Components
 
 #### Frame & Structure
-- Main frame (450mm)
-- Arms (4x)
-- Hardware kit
+- Carbon fiber frame (450mm)
+- 4x arms
 - Landing gear
 - Vibration dampeners
+- Hardware kit
 
 #### Propulsion System
-- Brushless motors (4x)
-  - KV rating: 920KV
-  - Size: 2212-2312
-- Propellers
-  - Size: 10x4.5
-  - Material: Carbon fiber
-- ESCs
-  - Current: 30A
-  - Protocol: DShot600
+1. **Motors (4x)**
+   - Type: Brushless DC
+   - KV Rating: 920KV
+   - Size: 2212-2312
+
+2. **Propellers**
+   - Size: 10x4.5
+   - Material: Carbon fiber
+   - CW & CCW pairs
+
+3. **ESCs**
+   - Current: 30A
+   - Protocol: DShot600
+   - BLHeli_32
 
 #### Electronics
-- Flight Controller
-  - Processor: F7
-  - IMU: MPU6000
-- Power Distribution Board
-- Battery
-  - Type: 4S LiPo
-  - Capacity: 3000mAh
-  - C-Rating: 50C
-- GPS Module
-- Telemetry System
+1. **Flight Controller**
+   - F7 processor
+   - MPU6000 IMU
+   - Integrated OSD
+
+2. **Power System**
+   - Power Distribution Board
+   - 4S LiPo battery (3000mAh, 50C)
+   - Battery monitor
 
 #### Control System
 - RC Receiver
@@ -207,31 +186,28 @@ flight_time = calculate_flight_time(battery_capacity, avg_current_draw)
 ## 🛠️ Build Process
 
 ### 1. Frame Assembly
-```mermaid
-graph TD
-    A[Unpack Frame] --> B[Assemble Center Plate]
-    B --> C[Attach Arms]
-    C --> D[Mount PDB]
-    D --> E[Install Landing Gear]
-    E --> F[Quality Check]
-```
+1. Assemble central frame
+2. Attach arms
+3. Mount PDB
+4. Install landing gear
+5. Quality check
 
-### 2. Motor Installation
-1. Identify CW and CCW motors
-2. Mount motors on arms
-3. Check motor rotation
-4. Secure all connections
-
-### 3. Electronic Setup
+### 2. Electronic Installation
 ```plaintext
 Wiring Sequence:
-1. ESC signal wires → Flight Controller
-2. Motor phase wires → ESCs
-3. Power distribution connections
-4. RC receiver setup
-5. GPS module installation
-6. Telemetry system integration
+1. Mount PDB in center
+2. Solder ESCs to PDB
+3. Connect motors to ESCs
+4. Install flight controller
+5. Connect receiver and GPS
 ```
+
+### 3. Configuration and Calibration
+1. ESC Calibration
+2. Flight Controller Setup
+3. Radio Setup
+4. Sensor Calibration
+5. Flight Mode Configuration
 
 ## 💻 Software Setup
 
@@ -254,56 +230,24 @@ pid_yaw:
   D: 0
 ```
 
-### Failsafe Settings
-```plaintext
-1. Radio Link Loss:
-   - Hover for 15 seconds
-   - Land if no signal recovery
-
-2. Battery Critical:
-   - Return to Home if possible
-   - Controlled landing
-
-3. GPS Loss:
-   - Switch to altitude hold
-   - Maintain position using optical flow
-```
-
-## 🎮 Flight Operations
-
-### Pre-Flight Checklist
-```markdown
-1. Physical Inspection
-   - [ ] Frame integrity
-   - [ ] Propeller condition
-   - [ ] Battery secure
-
-2. Electronic Check
-   - [ ] Battery voltage
-   - [ ] Motor response
-   - [ ] RC link quality
-   - [ ] GPS lock
-
-3. Environment Assessment
-   - [ ] Weather conditions
-   - [ ] Flying area clear
-   - [ ] Legal requirements met
-```
-
 ## ⚠️ Safety Protocols
 
-### Emergency Procedures
-1. Loss of Control
-2. Battery Failure
-3. Motor Failure
-4. GPS Issues
-5. Radio Interference
+### Pre-Flight Checklist
+1. Physical Inspection
+   - Frame integrity
+   - Propeller condition
+   - Battery secure
 
-### Safety Equipment
-- Fire extinguisher
-- Safety glasses
-- LiPo safe bag
-- First aid kit
+2. Electronic Check
+   - Battery voltage
+   - Motor response
+   - RC link quality
+   - GPS lock
+
+3. Environment Assessment
+   - Weather conditions
+   - Flying area clear
+   - Legal requirements met
 
 ## 🔍 Troubleshooting
 
@@ -314,59 +258,26 @@ pid_yaw:
 | Power Issues | Short flight time | Battery health check |
 | Control Problems | Delayed response | Check RC settings |
 
-## 🚀 Advanced Modifications
-
-### Performance Upgrades
-1. Improved ESCs
-2. Higher KV motors
-3. Lightweight frame components
-4. Enhanced cooling system
-
-### Feature Additions
-1. FPV system
-2. LED navigation lights
-3. Camera gimbal
-4. Payload release mechanism
-
-## 👥 Contributing
+## 🚀 Contributing
 
 We welcome contributions! Please read our [Contributing Guidelines](CONTRIBUTING.md) before submitting pull requests.
-
-### Development Setup
-```bash
-# Clone repository
-git clone https://github.com/yourusername/DIY-Quadcopter-Guide.git
-
-# Install dependencies
-cd DIY-Quadcopter-Guide
-npm install
-
-# Run tests
-npm test
-```
 
 ## 🌐 Support & Community
 
 - [Discord Server](https://discord.gg/yourdiscord)
 - [Forum](https://forum.yourdomain.com)
-- [Wiki](https://github.com/yourusername/DIY-Quadcopter-Guide/wiki)
-- [Issue Tracker](https://github.com/yourusername/DIY-Quadcopter-Guide/issues)
+- [Wiki](https://github.com/khairul-me/QuadcopterFromScratch/wiki)
+- [Issue Tracker](https://github.com/khairul-me/QuadcopterFromScratch/issues)
 
 ## 📜 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
-
-- Drone community contributors
-- Open-source flight controller developers
-- Testing and feedback providers
-
 ---
 
 <div align="center">
 
-**Made with ❤️ by [Your Name]**
+**Made with ❤️ by Khairul Islam**
 
 [Back to Top](#advanced-diy-quadcopter-build-guide-)
 
