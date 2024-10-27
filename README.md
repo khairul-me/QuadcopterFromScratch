@@ -1,265 +1,206 @@
-# SR04Advanced Library 🎯
+# Advanced DIY Quadcopter Project 🚁
 
 <div align="center">
 
-![SR04Advanced Banner](images/banner.png)
+![Drone Project Banner](images/drone-banner.png)
 
-[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/yourusername/SR04Advanced)
-[![Arduino](https://img.shields.io/badge/arduino-%23009639.svg?logo=arduino&logoColor=white)](https://www.arduino.cc/)
+[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/yourusername/DIY-Quadcopter)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-**Advanced HC-SR04 Ultrasonic Sensor Library with Intelligent Filtering and Processing**
-
-[Features](#features) • 
-[Installation](#installation) • 
-[Documentation](#documentation) • 
-[Examples](#examples)
+**A Complete Guide to Building Your Own Quadcopter with Physics-Based Understanding**
 
 Created by: Md Khairul Islam  
 Hobart and William Smith Colleges  
 Double major in Robotics and Computer Science
 
+[Core Physics](#physics-fundamentals) • 
+[Components](#essential-components) • 
+[Build Guide](#build-guide) • 
+[Flight Control](#flight-control)
+
 </div>
 
 ## 📚 Table of Contents
-1. [Overview](#overview)
-2. [Features](#features)
-3. [System Architecture](#system-architecture)
-4. [Hardware Setup](#hardware-setup)
-5. [Installation](#installation)
-6. [Basic Usage](#basic-usage)
+1. [Project Overview](#project-overview)
+2. [Physics Fundamentals](#physics-fundamentals)
+3. [Essential Components](#essential-components)
+4. [Build Guide](#build-guide)
+5. [Flight Control](#flight-control)
+6. [Troubleshooting](#troubleshooting)
 7. [Advanced Features](#advanced-features)
-8. [Signal Processing](#signal-processing)
-9. [Filter Types](#filter-types)
-10. [Measurement Modes](#measurement-modes)
-11. [Troubleshooting](#troubleshooting)
-12. [API Reference](#api-reference)
 
-## 🎯 Overview
+## 🎯 Project Overview
 
-The SR04Advanced library transforms standard HC-SR04 ultrasonic sensors into high-precision distance measurement systems through sophisticated signal processing and intelligent filtering algorithms.
+This project guides you through building a professional-grade quadcopter drone with a deep understanding of the physics and engineering principles involved. Unlike basic guides, we focus on understanding why each component works and how they interact.
 
-### Key Innovations
-- **Advanced Filtering System**: Multi-layer approach for optimal noise reduction
-- **Smart Processing**: Adaptive algorithms that adjust to environmental conditions
-- **Temperature Compensation**: Automatic adjustments for accurate measurements
-- **Quality Metrics**: Real-time assessment of measurement reliability
-
+### Key Features
 ```mermaid
 graph TD
-    subgraph "Core Features"
-        A[Raw Signal] --> B[Smart Processing]
-        B --> C[Filtered Output]
-        
-        B --> D[Quality Analysis]
-        B --> E[Temperature Compensation]
-        B --> F[Adaptive Filtering]
-    end
+    A[Quadcopter Features] --> B[Advanced Flight Control]
+    A --> C[GPS Navigation]
+    A --> D[Telemetry]
+    A --> E[Modular Design]
+    
+    B --> B1[PID Control]
+    B --> B2[Attitude Hold]
+    
+    C --> C1[Position Hold]
+    C --> C2[Return to Home]
+    
+    D --> D1[Real-time Data]
+    D --> D2[Flight Logging]
+    
+    E --> E1[Easy Upgrades]
+    E --> E2[Customization]
 ```
 
-### Performance Improvements
-- Up to 95% noise reduction
-- Enhanced accuracy through temperature compensation
-- Automatic error detection and correction
-- Real-time quality assessment
+## ⚡ Physics Fundamentals
 
-## ⚡ Features
-
-### Signal Processing Pipeline
+### 1. Thrust Generation
 ```mermaid
-flowchart TB
-    subgraph "Smart Filtering System"
-        Input[Raw Data] --> PreProcess[Pre-Processing]
+graph TB
+    subgraph "Thrust Generation"
+        P[Propeller] --> F[Forces]
         
-        subgraph "Processing Stages"
-            PreProcess --> Filter1[Spike Removal]
-            Filter1 --> Filter2[Noise Reduction]
-            Filter2 --> Filter3[Smart Tracking]
+        subgraph "Physics Equations"
+            T["T = CT × ρ × n² × D⁴"]
+            P1["P = CP × ρ × n³ × D⁵"]
         end
         
-        Filter3 --> Quality[Quality Check]
-        Quality --> Output[Final Output]
+        F --> L[Lift]
+        F --> D[Drag]
+        
+        L --> T
+        D --> P1
     end
 ```
 
-### Measurement Modes
-```mermaid
-stateDiagram-v2
-    [*] --> Normal
-    
-    state "Normal Mode" as Normal {
-        [*] --> Standard: Basic Usage
-    }
-    
-    state "Precise Mode" as Precise {
-        [*] --> Multiple: High Accuracy
-    }
-    
-    state "Fast Mode" as Fast {
-        [*] --> Quick: Rapid Updates
-    }
-    
-    state "Adaptive Mode" as Adaptive {
-        [*] --> Dynamic: Smart Adjustment
-    }
-```
+### Key Physics Principles:
+1. **Thrust Equation**
+   ```
+   T = CT × ρ × n² × D⁴
+   Where:
+   T = Thrust (N)
+   CT = Thrust coefficient
+   ρ = Air density (kg/m³)
+   n = Propeller speed (rev/s)
+   D = Propeller diameter (m)
+   ```
 
-## 🔧 Hardware Setup
+2. **Power Requirements**
+   ```
+   P = CP × ρ × n³ × D⁵
+   Where:
+   P = Power (Watts)
+   CP = Power coefficient
+   ```
 
-### Connection Diagram
+3. **Motor Dynamics**
 ```mermaid
 graph LR
-    subgraph Arduino
-        A1[5V]
-        A2[GND]
-        A3[Pin 9/TRIG]
-        A4[Pin 10/ECHO]
-    end
-    
-    subgraph HC-SR04
-        S1[VCC]
-        S2[GND]
-        S3[TRIG]
-        S4[ECHO]
-    end
-    
-    A1 === S1
-    A2 === S2
-    A3 === S3
-    A4 === S4
-```
-
-### Physical Connections
-- VCC → Arduino 5V
-- GND → Arduino GND
-- TRIG → Digital Pin 9
-- ECHO → Digital Pin 10
-
-## 📥 Installation
-
-### Arduino IDE
-1. Download the library ZIP file
-2. Arduino IDE → Sketch → Include Library → Add .ZIP Library
-3. Select downloaded file
-
-### PlatformIO
-```ini
-lib_deps =
-    SR04Advanced
-```
-
-## 🚀 Basic Usage
-
-```cpp
-#include <SR04Advanced.h>
-
-const int TRIGGER_PIN = 9;
-const int ECHO_PIN = 10;
-
-SR04Advanced sonar(TRIGGER_PIN, ECHO_PIN);
-
-void setup() {
-    Serial.begin(9600);
-    sonar.begin();  // Auto-calibration enabled
-}
-
-void loop() {
-    float distance = sonar.getSmartDistance();
-    Serial.print("Distance: ");
-    Serial.print(distance);
-    Serial.println(" cm");
-    delay(100);
-}
-```
-
-## 🔬 Signal Processing
-
-### Temperature Compensation
-```mermaid
-graph TB
-    subgraph "Temperature System"
-        T[Temperature] --> Calc[Speed Calculator]
-        Calc --> Adjust[Distance Adjustment]
+    subgraph "Motor Physics"
+        V[Voltage Input] --> RPM[Motor Speed]
+        RPM --> T[Thrust]
         
-        subgraph "Calculations"
-            F1["Speed = 331.3 + (0.606 × T°C)"]
-            F2["Distance = Speed × Time ÷ 2"]
+        KV[KV Rating] --> RPM
+        
+        subgraph "Relationships"
+            R1["RPM = KV × Voltage"]
+            R2["Thrust ∝ RPM²"]
         end
     end
 ```
 
-### Filter Performance
+### Flight Dynamics
 ```mermaid
-graph TB
-    subgraph "Filter Effects"
-        Raw[Raw Signal] --> Effects
-        
-        subgraph "Processing"
-            E1[Remove Spikes]
-            E2[Reduce Noise]
-            E3[Track Movement]
-            
-            Effects --> E1 & E2 & E3
-        end
-        
-        E1 & E2 & E3 --> Result[Clean Output]
-    end
+stateDiagram-v2
+    [*] --> Hovering
+    
+    state "Flight Controls" as FC {
+        Throttle --> Altitude
+        Roll --> Lateral
+        Pitch --> Forward
+        Yaw --> Rotation
+    }
+    
+    Hovering --> FC: Input Commands
+    FC --> Hovering: Stabilization
 ```
 
-## 🔍 Troubleshooting
+## 🔧 Essential Components
 
+### Frame Design
 ```mermaid
 graph TD
-    Issue[Problem Detected] --> Type{Issue Type}
-    
-    Type -->|Readings| Power[Check Power]
-    Type -->|Noise| Signal[Check Environment]
-    Type -->|Speed| Mode[Check Mode]
-    
-    Power --> Solution[Resolution]
-    Signal --> Solution
-    Mode --> Solution
+    subgraph "Frame Structure"
+        C[Center Plate] --> A1[Arm 1]
+        C --> A2[Arm 2]
+        C --> A3[Arm 3]
+        C --> A4[Arm 4]
+        
+        A1 --> M1[Motor 1]
+        A2 --> M2[Motor 2]
+        A3 --> M3[Motor 3]
+        A4 --> M4[Motor 4]
+    end
 ```
 
-## 📘 API Reference
+### Component List
+1. **Frame (450mm)**
+   - Carbon fiber construction
+   - X configuration
+   - Integrated power distribution
 
-### Core Methods
-```cpp
-void begin(bool autoCalibrate = true)
-float getDistance()
-float getSmartDistance()
-uint8_t getSignalQuality()
+2. **Motors**
+   ```
+   Size: 2213
+   KV Rating: 935
+   Max Thrust: 850g/motor
+   Operating Voltage: 11.1V-14.8V
+   ```
+
+3. **Electronic Speed Controllers (ESCs)**
+   - 30A rating
+   - BLHeli_S firmware
+   - Active brake support
+
+4. **Flight Controller**
+   - F7 processor
+   - MPU6000 gyroscope
+   - Integrated PDB
+
+[More components and their specifications...]
+
+## 🛠️ Build Guide
+
+### 1. Frame Assembly
+```mermaid
+graph TD
+    A[Unpack Frame] --> B[Assemble Center Plate]
+    B --> C[Attach Arms]
+    C --> D[Mount PDB]
+    D --> E[Install Motors]
 ```
 
-### Configuration
-```cpp
-void setFilterMode(uint8_t mode)
-void setMeasurementMode(uint8_t mode)
-void setTemperature(float temp_c)
+[Detailed assembly steps...]
+
+## 🎮 Flight Control
+
+### PID Control System
+```mermaid
+graph LR
+    SP[Setpoint] --> S[Sum]
+    S --> PID[PID Controller]
+    PID --> P[Plant]
+    P --> Sensor[Sensor]
+    Sensor --> |Feedback| S
 ```
 
-## 🤝 Contributing
+[More control system details...]
 
-1. Fork the repository
-2. Create feature branch
-3. Commit changes
-4. Push to branch
-5. Open pull request
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🌟 Support
-
-For issues, questions, or contributions:
-- Open an issue on GitHub
-- Contact: [Your Email]
-
----
-
-<div align="center">
-
-Made with 💡 by Md Khairul Islam
-
-</div>
+[Would you like me to continue with the rest of the sections? There's still much more to cover including:
+1. Detailed build steps
+2. Flight control system
+3. Safety protocols
+4. Troubleshooting guide
+5. Advanced features]
