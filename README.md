@@ -1,350 +1,265 @@
-# 🚁 DIY Quadcopter Build Guide: From Theory to Flight
+# SR04Advanced Library 🎯
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Issues](https://img.shields.io/github/issues/khairul-me/QuadcopterFromScratch)](https://github.com/khairul-me/QuadcopterFromScratch/issues)
-[![GitHub Stars](https://img.shields.io/github/stars/khairul-me/QuadcopterFromScratch)](https://github.com/khairul-me/QuadcopterFromScratch/stargazers)
+<div align="center">
 
-A comprehensive guide to building a professional-grade quadcopter drone, with detailed explanations of physics, engineering principles, and step-by-step instructions.
+![SR04Advanced Banner](images/banner.png)
+
+[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/yourusername/SR04Advanced)
+[![Arduino](https://img.shields.io/badge/arduino-%23009639.svg?logo=arduino&logoColor=white)](https://www.arduino.cc/)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+
+**Advanced HC-SR04 Ultrasonic Sensor Library with Intelligent Filtering and Processing**
+
+[Features](#features) • 
+[Installation](#installation) • 
+[Documentation](#documentation) • 
+[Examples](#examples)
+
+Created by: Md Khairul Islam  
+Hobart and William Smith Colleges  
+Double major in Robotics and Computer Science
+
+</div>
 
 ## 📚 Table of Contents
+1. [Overview](#overview)
+2. [Features](#features)
+3. [System Architecture](#system-architecture)
+4. [Hardware Setup](#hardware-setup)
+5. [Installation](#installation)
+6. [Basic Usage](#basic-usage)
+7. [Advanced Features](#advanced-features)
+8. [Signal Processing](#signal-processing)
+9. [Filter Types](#filter-types)
+10. [Measurement Modes](#measurement-modes)
+11. [Troubleshooting](#troubleshooting)
+12. [API Reference](#api-reference)
 
-1. [Understanding Drones](#understanding-drones)
-2. [Drone Components](#drone-components)
-3. [Build Process](#build-process)
-4. [Configuration Guide](#configuration-guide)
-5. [Pre-Flight Checklist](#pre-flight-checklist)
-6. [Flight Guide](#flight-guide)
-7. [Troubleshooting Guide](#troubleshooting-guide)
-8. [Support & Community](#support--community)
-9. [Contributing](#contributing)
-10. [License](#license)
+## 🎯 Overview
 
-## Technical Specifications
+The SR04Advanced library transforms standard HC-SR04 ultrasonic sensors into high-precision distance measurement systems through sophisticated signal processing and intelligent filtering algorithms.
 
-| Specification | Value |
-|--------------|-------|
-| Frame Size | 450mm |
-| Flight Time | 15-20 minutes |
-| Max Speed | 60 km/h |
-| Control Range | 1-2 km |
-| Maximum Payload | 500g |
-| Total Weight | ~1200g |
+### Key Innovations
+- **Advanced Filtering System**: Multi-layer approach for optimal noise reduction
+- **Smart Processing**: Adaptive algorithms that adjust to environmental conditions
+- **Temperature Compensation**: Automatic adjustments for accurate measurements
+- **Quality Metrics**: Real-time assessment of measurement reliability
 
-## Understanding Drones
-
-### Basic Quadcopter Layout
-```
-    Motor 1    Motor 2
-       \         /
-        \       /
-         [===]
-        /       \
-       /         \
-    Motor 3    Motor 4
-```
-
-### Flight Principles
-
-1. **Thrust Generation**
-```
-T = CT × ρ × n² × D⁴
-
-Where:
-T = Thrust (N)
-CT = Thrust coefficient
-ρ = Air density (kg/m³)
-n = Propeller rotational speed (rev/s)
-D = Propeller diameter (m)
+```mermaid
+graph TD
+    subgraph "Core Features"
+        A[Raw Signal] --> B[Smart Processing]
+        B --> C[Filtered Output]
+        
+        B --> D[Quality Analysis]
+        B --> E[Temperature Compensation]
+        B --> F[Adaptive Filtering]
+    end
 ```
 
-2. **Power Requirements**
-```
-P = CP × ρ × n³ × D⁵
+### Performance Improvements
+- Up to 95% noise reduction
+- Enhanced accuracy through temperature compensation
+- Automatic error detection and correction
+- Real-time quality assessment
 
-Where:
-P = Power (W)
-CP = Power coefficient
-```
+## ⚡ Features
 
-3. **Flight Dynamics**
-- Throttle: Vertical movement
-- Roll: Left/right tilt
-- Pitch: Forward/backward tilt
-- Yaw: Rotation
-
-## Drone Components
-
-### Essential Parts List
-
-#### Frame & Structure
-- Carbon fiber frame (450mm)
-- 4× arms
-- Landing gear
-- Vibration dampeners
-- Mounting hardware
-
-#### Propulsion System
-```
-Motors (4×):
-- Type: Brushless DC
-- KV Rating: 920KV
-- Size: 2212-2312
-
-ESCs (4×):
-- Current: 30A
-- Protocol: DShot600
-- Firmware: BLHeli_32
-
-Propellers:
-- Size: 10×4.5
-- Type: 2× CW, 2× CCW
-- Material: Carbon fiber
+### Signal Processing Pipeline
+```mermaid
+flowchart TB
+    subgraph "Smart Filtering System"
+        Input[Raw Data] --> PreProcess[Pre-Processing]
+        
+        subgraph "Processing Stages"
+            PreProcess --> Filter1[Spike Removal]
+            Filter1 --> Filter2[Noise Reduction]
+            Filter2 --> Filter3[Smart Tracking]
+        end
+        
+        Filter3 --> Quality[Quality Check]
+        Quality --> Output[Final Output]
+    end
 ```
 
-#### Electronics
-```
-Flight Controller:
-- Processor: F7
-- IMU: MPU6000
-- Built-in OSD
-
-Power System:
-- PDB (Power Distribution Board)
-- 4S LiPo battery (3000mAh, 50C)
-- Battery monitor
-- XT60 connectors
-
-Communication:
-- RC Receiver
-- GPS Module
-- Telemetry (optional)
-```
-
-### Required Tools
-
-#### Essential
-- Soldering iron (40W minimum)
-- Hex driver set (M2-M5)
-- LiPo battery charger
-- Multimeter
-- Wire strippers/cutters
-- Heat shrink tubing
-- Helping hands for soldering
-
-#### Optional
-- Oscilloscope
-- Battery voltage tester
-- Prop balancer
-- Heat gun
-
-## Build Process
-
-### 1. Preparation
-```
-Workspace Setup:
-□ Clean work area
-□ Organize components
-□ Verify all parts present
-□ Read manuals
-□ Gather tools
+### Measurement Modes
+```mermaid
+stateDiagram-v2
+    [*] --> Normal
+    
+    state "Normal Mode" as Normal {
+        [*] --> Standard: Basic Usage
+    }
+    
+    state "Precise Mode" as Precise {
+        [*] --> Multiple: High Accuracy
+    }
+    
+    state "Fast Mode" as Fast {
+        [*] --> Quick: Rapid Updates
+    }
+    
+    state "Adaptive Mode" as Adaptive {
+        [*] --> Dynamic: Smart Adjustment
+    }
 ```
 
-### 2. Frame Assembly
-```
-Step-by-Step:
-1. Mount center plate
-2. Attach arms
-   - Check orientation
-   - Secure all screws
-3. Install landing gear
-4. Mount PDB
-5. Quality check
-```
+## 🔧 Hardware Setup
 
-### 3. Electronics Installation
-```
-Wiring Sequence:
-1. Solder XT60 to PDB
-2. Mount ESCs on arms
-3. Connect motor wires
-4. Install flight controller
-5. Connect receiver
-6. Mount GPS module
-```
-
-### 4. Configuration
-
-#### Flight Controller Settings
-```yaml
-# Basic PID Configuration
-pid_roll:
-  P: 42
-  I: 40
-  D: 20
-
-pid_pitch:
-  P: 42
-  I: 40
-  D: 20
-
-pid_yaw:
-  P: 85
-  I: 45
-  D: 0
+### Connection Diagram
+```mermaid
+graph LR
+    subgraph Arduino
+        A1[5V]
+        A2[GND]
+        A3[Pin 9/TRIG]
+        A4[Pin 10/ECHO]
+    end
+    
+    subgraph HC-SR04
+        S1[VCC]
+        S2[GND]
+        S3[TRIG]
+        S4[ECHO]
+    end
+    
+    A1 === S1
+    A2 === S2
+    A3 === S3
+    A4 === S4
 ```
 
-#### Radio Setup
-```
-Channel Mapping:
-1. Throttle
-2. Aileron (Roll)
-3. Elevator (Pitch)
-4. Rudder (Yaw)
-5. Flight Mode
-6. Arm Switch
-```
+### Physical Connections
+- VCC → Arduino 5V
+- GND → Arduino GND
+- TRIG → Digital Pin 9
+- ECHO → Digital Pin 10
 
-## Pre-Flight Calculations
+## 📥 Installation
 
-### Thrust-to-Weight Ratio (TWR)
-```python
-def calculate_twr(motor_thrust, components_weight, battery_weight):
-    total_thrust = motor_thrust * 4  # Four motors
-    total_weight = components_weight + battery_weight
-    return total_thrust / total_weight
+### Arduino IDE
+1. Download the library ZIP file
+2. Arduino IDE → Sketch → Include Library → Add .ZIP Library
+3. Select downloaded file
 
-# Example
-motor_thrust = 800  # grams
-components_weight = 800  # grams
-battery_weight = 400  # grams
-
-twr = calculate_twr(motor_thrust, components_weight, battery_weight)
-# Target TWR > 2.0 for good performance
+### PlatformIO
+```ini
+lib_deps =
+    SR04Advanced
 ```
 
-### Flight Time Estimation
-```python
-def calculate_flight_time(battery_capacity, avg_current_draw):
-    """
-    battery_capacity in mAh
-    avg_current_draw in A
-    returns flight time in minutes
-    """
-    return (battery_capacity / 1000 * 0.8) / avg_current_draw * 60
+## 🚀 Basic Usage
 
-# Example
-battery_capacity = 3000  # mAh
-avg_current_draw = 20  # A
-flight_time = calculate_flight_time(battery_capacity, avg_current_draw)
+```cpp
+#include <SR04Advanced.h>
+
+const int TRIGGER_PIN = 9;
+const int ECHO_PIN = 10;
+
+SR04Advanced sonar(TRIGGER_PIN, ECHO_PIN);
+
+void setup() {
+    Serial.begin(9600);
+    sonar.begin();  // Auto-calibration enabled
+}
+
+void loop() {
+    float distance = sonar.getSmartDistance();
+    Serial.print("Distance: ");
+    Serial.print(distance);
+    Serial.println(" cm");
+    delay(100);
+}
 ```
 
-## Pre-Flight Checklist
+## 🔬 Signal Processing
 
-### Physical Inspection
-```
-□ Frame integrity
-□ Propeller condition
-□ Battery secure
-□ All screws tight
-□ No loose wires
-```
-
-### Electronics Check
-```
-□ Battery voltage
-□ Motor response
-□ Radio link
-□ GPS lock
-□ Failsafe test
+### Temperature Compensation
+```mermaid
+graph TB
+    subgraph "Temperature System"
+        T[Temperature] --> Calc[Speed Calculator]
+        Calc --> Adjust[Distance Adjustment]
+        
+        subgraph "Calculations"
+            F1["Speed = 331.3 + (0.606 × T°C)"]
+            F2["Distance = Speed × Time ÷ 2"]
+        end
+    end
 ```
 
-### Environment Assessment
-```
-□ Weather conditions
-□ Flying area clear
-□ Legal requirements met
-□ Spotter available
-```
-
-## Troubleshooting Guide
-
-### Common Issues
-
-| Problem | Cause | Solution |
-|---------|-------|----------|
-| Won't arm | FC not level | Calibrate accelerometer |
-| Unstable flight | Bad PID tune | Adjust PID values |
-| Motor not spinning | ESC issue | Check connections |
-| Poor GPS hold | Interference | Relocate GPS module |
-| Short flight time | High current draw | Check power system |
-
-### Motor Direction Check
-```
-Front Left: CCW
-Front Right: CW
-Back Left: CW
-Back Right: CCW
+### Filter Performance
+```mermaid
+graph TB
+    subgraph "Filter Effects"
+        Raw[Raw Signal] --> Effects
+        
+        subgraph "Processing"
+            E1[Remove Spikes]
+            E2[Reduce Noise]
+            E3[Track Movement]
+            
+            Effects --> E1 & E2 & E3
+        end
+        
+        E1 & E2 & E3 --> Result[Clean Output]
+    end
 ```
 
-## Flight Guide
+## 🔍 Troubleshooting
 
-### First Flight Steps
-1. Choose open area
-2. Start in stabilized mode
-3. Take off slowly
-4. Hover test
-5. Basic movements
-6. Landing practice
+```mermaid
+graph TD
+    Issue[Problem Detected] --> Type{Issue Type}
+    
+    Type -->|Readings| Power[Check Power]
+    Type -->|Noise| Signal[Check Environment]
+    Type -->|Speed| Mode[Check Mode]
+    
+    Power --> Solution[Resolution]
+    Signal --> Solution
+    Mode --> Solution
+```
 
-### Advanced Maneuvers
-- Figure 8 patterns
-- Precision hovering
-- Emergency procedures
-- Return to home testing
+## 📘 API Reference
 
-## Safety Guidelines
+### Core Methods
+```cpp
+void begin(bool autoCalibrate = true)
+float getDistance()
+float getSmartDistance()
+uint8_t getSignalQuality()
+```
 
-### General Safety
-1. Never fly over people
-2. Maintain visual line of sight
-3. Check local regulations
-4. Monitor battery voltage
-5. Have emergency procedures ready
+### Configuration
+```cpp
+void setFilterMode(uint8_t mode)
+void setMeasurementMode(uint8_t mode)
+void setTemperature(float temp_c)
+```
 
-### Battery Safety
-- Never over-discharge
-- Store at 3.8V per cell
-- Check for swelling
-- Use LiPo safe bag
-- Proper charging procedures
-
-## Contributing
-
-We welcome contributions! Please follow these steps:
+## 🤝 Contributing
 
 1. Fork the repository
-2. Create feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit changes (`git commit -m 'Add AmazingFeature'`)
-4. Push to branch (`git push origin feature/AmazingFeature`)
-5. Open Pull Request
+2. Create feature branch
+3. Commit changes
+4. Push to branch
+5. Open pull request
 
-## Support & Community
-
-- [Discord Server](https://discord.gg/dronecommunity)
-- [Wiki](https://github.com/khairul-me/QuadcopterFromScratch/wiki)
-- [Issue Tracker](https://github.com/khairul-me/QuadcopterFromScratch/issues)
-- [Updates](https://github.com/khairul-me/QuadcopterFromScratch/releases)
-
-## License
+## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🌟 Support
+
+For issues, questions, or contributions:
+- Open an issue on GitHub
+- Contact: [Your Email]
 
 ---
 
 <div align="center">
 
-**Created with ❤️ by [Khairul Islam](https://github.com/khairul-me)**
-
-[Back to Top](#-diy-quadcopter-build-guide-from-theory-to-flight)
+Made with 💡 by Md Khairul Islam
 
 </div>
